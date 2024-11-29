@@ -1,0 +1,16 @@
+// Privacy Smart Contract Example in SypherLang
+contract PrivacyContract {
+    private balance;
+
+    function deposit(amount) {
+        balance += amount;
+    }
+
+    function withdraw(amount) {
+        balance -= amount;
+    }
+
+    function getBalance() {
+        return balance;
+    }
+}
