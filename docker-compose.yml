@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  sypher-node:
+    build: ./src
+    ports:
+      - "8545:8545"
+    volumes:
+      - ./data:/data
+
+  wallet:
+    build: ./wallet
+    ports:
+      - "3000:3000"
+
+  faucet:
+    build: ./faucet
+    ports:
+      - "4000:4000"
