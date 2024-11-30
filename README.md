@@ -216,10 +216,3 @@ The SypherCore wallet can be used to interact with your blockchain and deployed 
 7. **Connect**: Connect using Geth or JSON-RPC API.
 8. **Deploy Contracts**: Compile and deploy SypherCore contracts.
 9. **Use Wallet**: Set up and use the SypherCore wallet to interact with your blockchain.
-
-### **Notes**:
-- Keep your private keys secure. Avoid exposing them in your source code.
-- The example above assumes a single-node setup for simplicity, but using Docker makes it easy to scale nodes.
-- Always run your nodes with sufficient security measures, especially if you expose ports to the public.
-
-If you have any further questions or need additional guidance, feel free to ask!
