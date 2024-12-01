@@ -1,45 +1,38 @@
-import sys
-import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
-from blockchain import Blockchain
 import argparse
-from src.blockchain import Blockchain
-from wallet.app import Wallet
-from faucet.faucet import Faucet
-from contracts.privacy_contract import PrivacyContract
 import logging
 import sys
 import socket
-import threading
+import os
+
+# Add src to system path so imports work properly
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
+from blockchain import Blockchain
+from wallet.app import Wallet
+from faucet.faucet import Faucet
+from contracts.privacy_contract import PrivacyContract
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class SypherCoreMain:
     def __init__(self):
-        self.blockchain = None
-        self.wallet = None
-        self.faucet = None
+        self.blockchain = Blockchain()
+        self.wallet = Wallet()
+        self.faucet = Faucet()
         self.peers = []
 
     def initialize_blockchain(self):
         logging.info("Initializing SypherCore Blockchain...")
-        self.blockchain = Blockchain()
         self.blockchain.create_genesis_block()
         logging.info("Genesis block created successfully.")
 
     def start_wallet(self):
         logging.info("Starting Wallet...")
-        self.wallet = Wallet()
         logging.info("Wallet setup complete.")
 
     def start_faucet(self):
         logging.info("Starting Faucet Service...")
-        self.faucet = Faucet()
         logging.info("Faucet service is ready for token distribution.")
 
     def deploy_smart_contract(self):
@@ -89,7 +82,7 @@ class SypherCoreMain:
 
     def mine_block(self):
         logging.info("Starting mining operation...")
-        if self.blockchain.mine_pending_transactions():
+        if self.blockchain.mine_pending_transactions("Miner1"):
             logging.info("Block mined and added to the blockchain.")
         else:
             logging.error("Mining failed. Make sure there are transactions to include in the block.")
