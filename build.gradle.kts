@@ -6,6 +6,11 @@ plugins {
 repositories {
     mavenCentral()
 }
+dependencies {
+    implementation(kotlin("stdlib"))
+    implementation("com.google.guava:guava:31.0.1-jre")
+    implementation("com.hedera.hashgraph:sdk:2.15.1") // Update version as needed
+}
 
 dependencies {
     implementation(kotlin("stdlib"))
