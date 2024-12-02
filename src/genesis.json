@@ -1,14 +1,20 @@
 {
-  "config": {
-    "chainId": 1126,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip155Block": 0,
-    "eip158Block": 0
-  },
-  "difficulty": "0x20000",
-  "gasLimit": "0x8000000",
-  "alloc": {
-    "0xYourAccountAddressHere": { "balance": "1000000000000000000000" }
+  "genesis_time": "2024-12-01T00:00:00Z",
+  "chain_id": "SypherCore",
+  "validators": [
+    {
+      "address": "your_validator_address",
+      "power": "100",
+      "name": "validator_1"
+    }
+  ],
+  "app_hash": "",
+  "app_state": {
+    "staking": {
+      "params": {
+        "bond_denom": "stake",
+        "max_validators": 100
+      }
+    }
   }
 }

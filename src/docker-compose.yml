@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  zokrates:
+    image: zokrates/zokrates:latest
+    container_name: zokrates
+    volumes:
+      - ./crypto:/data
+    working_dir: /data
+    command: tail -f /dev/null
+
+  hedera-node:
+    image: hedera/hashgraph-node
+    container_name: hedera-node
+    ports:
+      - "50211:50211"
+      - "50212:50212"
+    environment:
+      - JAVA_OPTS=-Xmx2g
+    volumes:
+      - ./hedera-sdk:/opt/hedera-sdk

@@ -1,37 +1,38 @@
 import argparse
-from src.blockchain import Blockchain
-from wallet.app import Wallet
-from faucet.faucet import Faucet
-from contracts.privacy_contract import PrivacyContract
 import logging
 import sys
 import socket
-import threading
+import os
+
+# Add src to system path so imports work properly
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
+from blockchain import Blockchain
+from wallet.app import Wallet
+from faucet.faucet import Faucet
+from contracts.privacy_contract import PrivacyContract
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class SypherCoreMain:
     def __init__(self):
-        self.blockchain = None
-        self.wallet = None
-        self.faucet = None
+        self.blockchain = Blockchain()
+        self.wallet = Wallet()
+        self.faucet = Faucet()
         self.peers = []
 
     def initialize_blockchain(self):
         logging.info("Initializing SypherCore Blockchain...")
-        self.blockchain = Blockchain()
         self.blockchain.create_genesis_block()
         logging.info("Genesis block created successfully.")
 
     def start_wallet(self):
         logging.info("Starting Wallet...")
-        self.wallet = Wallet()
         logging.info("Wallet setup complete.")
 
     def start_faucet(self):
         logging.info("Starting Faucet Service...")
-        self.faucet = Faucet()
         logging.info("Faucet service is ready for token distribution.")
 
     def deploy_smart_contract(self):
@@ -81,10 +82,50 @@ class SypherCoreMain:
 
     def mine_block(self):
         logging.info("Starting mining operation...")
-        if self.blockchain.mine_pending_transactions():
+        if self.blockchain.mine_pending_transactions("Miner1"):
             logging.info("Block mined and added to the blockchain.")
         else:
             logging.error("Mining failed. Make sure there are transactions to include in the block.")
 
     def show_peers(self):
-        if not self
+        if not self.peers:
+            logging.info("No peers connected.")
+        else:
+            logging.info(f"Connected peers: {', '.join(self.peers)}")
+
+    def connect_peer(self):
+        logging.info("Connecting to a new peer...")
+        peer_address = input("Enter peer address (IP:Port): ").strip()
+        if self.validate_peer_address(peer_address):
+            if peer_address not in self.peers:
+                self.peers.append(peer_address)
+                logging.info(f"Successfully connected to peer {peer_address}.")
+            else:
+                logging.warning("Peer is already connected.")
+        else:
+            logging.error("Invalid peer address. Please provide a valid IP and port.")
+
+    @staticmethod
+    def validate_peer_address(peer_address):
+        try:
+            host, port = peer_address.split(':')
+            socket.inet_aton(host)
+            int(port)  # Make sure port is a valid integer
+            return True
+        except (socket.error, ValueError):
+            return False
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="SypherCore Blockchain Node")
+    parser.add_argument("--genesis", action="store_true", help="Initialize the blockchain with the genesis block")
+    args = parser.parse_args()
+
+    main_app = SypherCoreMain()
+
+    if args.genesis:
+        main_app.initialize_blockchain()
+
+    main_app.start_wallet()
+    main_app.start_faucet()
+    main_app.deploy_smart_contract()
+    main_app.run()

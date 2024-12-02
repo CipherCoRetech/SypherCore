@@ -1,0 +1,33 @@
+# Flask for API development
+Flask==2.3.2
+
+# Cryptography library for RSA, AES, and encryption mechanisms
+cryptography==41.0.2
+
+# Flask-CORS for handling cross-origin requests
+Flask-CORS==3.0.10
+
+# PyJWT for token-based authentication
+PyJWT==2.8.0
+
+# Requests for HTTP requests (if needed in your app)
+requests==2.31.0
+
+# Zero-Knowledge Proofs library (py-zkp)
+pycryptodome==3.18.0
+
+# Libraries for parsing and optimizing
+ply==3.11
+
+# Database (SQLite) support
+SQLAlchemy==2.0.20
+
+# Unit testing and mock support
+pytest==7.4.0
+pytest-mock==3.11.1
+
+# Gunicorn for production server
+gunicorn==20.1.0
+
+# Environment variable management
+python-dotenv==1.0.0

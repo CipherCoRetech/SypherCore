@@ -1,19 +1,24 @@
-version: '3.7'
+# Use a lightweight base image for Python 3.8
+FROM python:3.8-slim
 
-services:
-  sypher-node:
-    build: ./src
-    ports:
-      - "8545:8545"
-    volumes:
-      - ./data:/data
+# Set the working directory in the container
+WORKDIR /app
 
-  wallet:
-    build: ./wallet
-    ports:
-      - "3000:3000"
+# Copy only requirements first to leverage Docker cache during the build
+COPY requirements.txt requirements.txt
 
-  faucet:
-    build: ./faucet
-    ports:
-      - "4000:4000"
+# Install dependencies
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code into the container
+COPY . .
+
+# Set environment variables to prevent Python from buffering output
+ENV PYTHONUNBUFFERED=1
+
+# Expose the Flask port (ensure it matches your Flask app)
+EXPOSE 8080
+
+# Run the application
+CMD ["python3", "app.py"]

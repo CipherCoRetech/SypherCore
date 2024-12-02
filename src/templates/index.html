@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SypherCore Wallet</title>
+</head>
+<body>
+    <h1>Welcome to the SypherCore Wallet</h1>
+    <form action="/wallet/create" method="post">
+        <button type="submit">Create New Wallet</button>
+    </form>
+    <form action="/wallet/balance" method="get">
+        <input type="text" name="address" placeholder="Enter Address">
+        <button type="submit">Get Balance</button>
+    </form>
+    <form action="/wallet/transfer" method="post">
+        <input type="text" name="sender" placeholder="Sender Address">
+        <input type="text" name="receiver" placeholder="Receiver Address">
+        <input type="number" name="amount" placeholder="Amount">
+        <button type="submit">Transfer Tokens</button>
+    </form>
+</body>
+</html>
