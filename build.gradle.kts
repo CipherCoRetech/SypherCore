@@ -14,8 +14,11 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    // Add any additional dependencies you need here, e.g., Hedera SDK
-    implementation("com.hedera.hashgraph:sdk:2.0.0") // Update the version accordingly
+    // Hedera SDK dependency (replace version if needed)
+    implementation("com.hedera.hashgraph:sdk:2.0.0")
+    
+    // Add any additional dependencies here
+    // Example: implementation("com.example:some-library:1.0.0")
 
     testImplementation(kotlin("test"))
 }
