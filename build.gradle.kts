@@ -23,8 +23,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     
-    // Hedera SDK dependency (check for the latest version)
-    implementation("com.hedera.hashgraph:sdk:2.0.0")
+    // Update to the latest version of Hedera SDK
+    implementation("com.hedera.hashgraph:sdk:2.45.0")
     
     // Cryptographic library for ring signatures
     implementation("org.bouncycastle:bcprov-jdk15on:1.70")
