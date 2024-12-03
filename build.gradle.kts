@@ -3,10 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.8.0"
     application
+    id("com.github.ben-manes.versions") version "0.42.0" // Plugin for managing versions
+    id("org.owasp.dependencycheck") version "8.1.0" // OWASP dependency-check plugin
 }
 
 group = "com.syphercore"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 java {
     toolchain {
@@ -20,11 +22,15 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    // Hedera SDK dependency (replace version if needed)
+    
+    // Hedera SDK dependency (check for the latest version)
     implementation("com.hedera.hashgraph:sdk:2.0.0")
     
-    // Add any additional dependencies here
-    // Example: implementation("com.example:some-library:1.0.0")
+    // Cryptographic library for ring signatures
+    implementation("org.bouncycastle:bcprov-jdk15on:1.70")
+    
+    // Example placeholder for zk-SNARK library
+    // Ensure compatibility with JVM and Kotlin (could require using JNI bindings)
 
     testImplementation(kotlin("test"))
 }
